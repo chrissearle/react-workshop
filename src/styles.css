@@ -1,0 +1,29 @@
+body {
+  width: 500px;
+}
+
+ul {
+  padding: 0;
+  list-style-type: none;
+}
+
+  ul li {
+    padding: 0.5em 0;
+    overflow: auto;
+    border-top: 1px solid gray;
+  }
+
+    ul li:first-child {
+      border-top: none;
+    }
+
+    ul li button {
+      float: right;
+    }
+
+textarea {
+  width: 100%;
+  display: block;
+  box-sizing: border-box;
+  margin-bottom: 0.5em;
+}
