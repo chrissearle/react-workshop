@@ -35,14 +35,7 @@ module.exports = class extends BaseStore {
         break;
 
       case ItemsActions.ADD_ITEM:
-        this.items.push({
-          value: event.item,
-          checked: false
-        });
-        break;
-
-      case ItemsActions.CHECK_ITEM:
-        this.items[event.iItem].checked = event.checked;
+        this.items.push(event.item);
         break;
 
       case ItemsActions.REMOVE_ITEM:
