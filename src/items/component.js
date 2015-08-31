@@ -43,7 +43,7 @@ module.exports = React.createClass({
                 <li key={i}>
                   {item}
 
-                  <button onClick={this.onRemove.bind(null, i)}>
+                  <button className="delete" onClick={this.onRemove.bind(null, i)}>
                     Delete
                   </button>
                 </li>
@@ -52,7 +52,7 @@ module.exports = React.createClass({
           </ul>}
 
         <textarea value={this.props.formValue} onChange={this.onChange} />
-        <button onClick={this.onAdd}>Add</button>
+        <button className="add" onClick={this.onAdd}>Add</button>
       </div>
     );
   }
