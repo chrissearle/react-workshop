@@ -51,21 +51,44 @@ describe("items/Factory", function () {
 
         Dispatcher.dispatch({
           type: ApplicationActions.LOADED,
-          items: ["foo", "bar"]
+          items: [{value: "foo"}, {value: "bar"}]
         });
 
-        ItemsStore.getItems().should.deep.equal(["foo", "bar"]);
+        ItemsStore.getItems().should.deep.equal([{value: "foo"}, {value: "bar"}]);
       });
     });
 
     describe("ItemsActions.ADD_ITEM", function () {
-      it("should add an item to its list", function () {
+      it("should add an unchecked item to its list", function () {
         Dispatcher.dispatch({
           type: ItemsActions.ADD_ITEM,
           item: "foo"
         });
 
-        ItemsStore.getItems().should.include("foo");
+        ItemsStore.getItems().should.include({
+          value: "foo",
+          checked: false
+        });
+      });
+    });
+
+    describe("ItemsActions.CHECK_ITEM", function () {
+      it("should change the checked status of an item", function () {
+        Dispatcher.dispatch({
+          type: ItemsActions.ADD_ITEM,
+          item: "foo"
+        });
+
+        Dispatcher.dispatch({
+          type: ItemsActions.CHECK_ITEM,
+          iItem: 0,
+          checked: true
+        });
+
+        ItemsStore.getItems().should.include({
+          value: "foo",
+          checked: true
+        });
       });
     });
 

@@ -33,6 +33,18 @@ describe("items/Service", function () {
     });
   });
 
+  describe("checkItem()", function () {
+    it("should perform a put request with the index and check status", function () {
+      var request = nock("http://localhost")
+        .put("/items/1?checked=true")
+        .reply(200);
+
+      ItemsService.checkItem(1, true);
+
+      request.isDone().should.equal(true);
+    });
+  });
+
   describe("removeItem()", function () {
     it("should perform a delete request with the index", function () {
       var request = nock("http://localhost")

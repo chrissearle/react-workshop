@@ -21,6 +21,12 @@ module.exports = {
     });
   },
 
+  checkItem: function (iItem, checked) {
+    return new Promise(function (resolve) {
+      Superagent.put("/items/" + iItem + "?checked=" + checked).end(resolve);
+    });
+  },
+
   removeItem: function (iItem) {
     return new Promise(function (resolve) {
       Superagent.del("/items/" + iItem).end(resolve);

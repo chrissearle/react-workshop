@@ -19,7 +19,7 @@ describe("items/Component", function () {
 
   describe("when isLoading is false", function () {
     it("should render the given items", function () {
-      var items = ["foo", "bar"];
+      var items = [{value: "foo"}, {value: "bar"}];
 
       var rendering = React.renderToString(<Items isLoading={false} items={items} />);
 
@@ -28,7 +28,7 @@ describe("items/Component", function () {
     });
 
     it("should render a delete button for each item", function () {
-      var items = ["foo", "bar"];
+      var items = [{value: "foo"}, {value: "bar"}];
 
       var rendering = React.renderToString(<Items isLoading={false} items={items} />);
 
@@ -38,6 +38,19 @@ describe("items/Component", function () {
       rendering = rendering.substring(rendering.indexOf("Delete") + "Delete".length);
 
       rendering.should.include("Delete");
+    });
+
+    it("should render a checkbox for each item", function () {
+      var items = [{value: "foo"}, {value: "bar"}];
+
+      var rendering = React.renderToString(<Items isLoading={false} items={items} />);
+
+      rendering.should.include("Done?");
+
+      // The rest of the string after the first occurrence
+      rendering = rendering.substring(rendering.indexOf("Done?") + "Done?".length);
+
+      rendering.should.include("Done?");
     });
 
     it("should render the given form value", function () {

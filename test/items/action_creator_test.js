@@ -40,6 +40,34 @@ describe("items/ActionsCreator", function () {
     });
   });
 
+  describe("checkItem()", function () {
+    beforeEach(function () {
+      this.sinon.stub(ItemsService, "checkItem").returns(Promise.resolve());
+    });
+
+    it("should invoke ItemsService.checkItem()", function () {
+      ItemsActionCreator.checkItem(1, true);
+
+      ItemsService.checkItem.should.have.been.calledWith(1, true);
+    });
+
+    it("should eventually dispatch an CHECK event with the index and checked status", function (done) {
+      this.sinon.spy(Dispatcher, "dispatch");
+
+      ItemsActionCreator.checkItem(1, true);
+
+      setTimeout(function () {
+        var args = Dispatcher.dispatch.args[0][0];
+
+        args.type.should.equal(ItemsActions.CHECK_ITEM);
+        args.iItem.should.equal(1);
+        args.checked.should.equal(true);
+
+        done();
+      });
+    });
+  });
+
   describe("removeItem()", function () {
     beforeEach(function () {
       this.sinon.stub(ItemsService, "removeItem").returns(Promise.resolve());

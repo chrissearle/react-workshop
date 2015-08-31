@@ -17,6 +17,11 @@ ul {
       border-top: none;
     }
 
+    ul li label {
+      float: right;
+      margin-right: 0.5em;
+    }
+
     ul li button {
       float: right;
     }

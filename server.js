@@ -8,7 +8,16 @@ var babelify = require("babelify"),
 
 var application = express();
 
-var items = ["foo", "bar", "baz"];
+var items = [{
+  value: "foo",
+  checked: false
+}, {
+  value: "bar",
+  checked: true
+}, {
+  value: "baz",
+  checked: false
+}];
 
 application.get("/items", function (request, response) {
   setTimeout(function () {
@@ -17,7 +26,15 @@ application.get("/items", function (request, response) {
 });
 
 application.post("/items", function (request, response) {
-  items.push(request.query.item);
+  items.push({
+    value: request.query.item,
+    checked: false
+  });
+  response.send();
+});
+
+application.put("/items/:index", function (request, response) {
+  items[request.params.index].checked = (request.query.checked === "true");
   response.send();
 });
 

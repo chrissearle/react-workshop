@@ -20,6 +20,10 @@ module.exports = React.createClass({
     this.props.onAdd(this.props.formValue);
   },
 
+  onCheck: function (iItem, e) {
+    this.props.onCheck(iItem, e.target.checked);
+  },
+
   onChange: function (e) {
     this.props.onChange(e.target.value);
   },
@@ -41,11 +45,15 @@ module.exports = React.createClass({
             {(this.props.items || []).map(function (item, i) {
               return (
                 <li key={i}>
-                  {item}
+                  {item.value}
 
                   <button onClick={this.onRemove.bind(null, i)}>
                     Delete
                   </button>
+
+                  <label>
+                    <input type="checkbox" checked={item.checked} onChange={this.onCheck.bind(null, i)} /> Done?
+                  </label>
                 </li>
               );
             }, this)}

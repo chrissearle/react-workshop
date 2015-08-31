@@ -23,6 +23,7 @@ function renderApplication () {
     isLoading: ItemsStore.getIsLoading(),
     items: ItemsStore.getItems(),
     onAdd: ItemsActionCreatore.addItem,
+    onCheck: ItemsActionCreatore.checkItem,
     onRemove: ItemsActionCreatore.removeItem
   };
 

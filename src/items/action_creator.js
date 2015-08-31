@@ -18,6 +18,16 @@ module.exports = {
     });
   },
 
+  checkItem: function (iItem, checked) {
+    ItemsService.checkItem(iItem, checked).then(function () {
+      Dispatcher.dispatch({
+        type: ItemsActions.CHECK_ITEM,
+        iItem: iItem,
+        checked: checked
+      });
+    });
+  },
+
   removeItem: function (iItem) {
     ItemsService.removeItem(iItem).then(function () {
       Dispatcher.dispatch({
