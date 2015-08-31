@@ -4,8 +4,6 @@
 
 var BaseStore = require("../base_store");
 
-var ApplicationActions = require("../application/actions");
-
 var FormActions = require("./actions");
 
 var ItemsActions = require("../items/actions");
@@ -23,7 +21,6 @@ module.exports = class extends BaseStore {
 
   handleEvent (event) {
     switch (event.type) {
-      case ApplicationActions.LOADED:
       case FormActions.CHANGE_FIELD:
         this.formValue = event.formValue;
         break;
