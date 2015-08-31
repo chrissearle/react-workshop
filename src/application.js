@@ -19,6 +19,7 @@ var ItemsActionCreatore = require("./items/action_creator");
 function renderApplication () {
   var state = {
     formValue: FormStore.getFormValue(),
+    onBlur: FormActionCreator.blurField,
     onChange: FormActionCreator.changeField,
     isLoading: ItemsStore.getIsLoading(),
     items: ItemsStore.getItems(),

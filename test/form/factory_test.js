@@ -6,6 +6,8 @@ require("../helper");
 
 var Dispatcher = require("../../src/dispatcher");
 
+var ApplicationActions = require("../../src/application/actions");
+
 var ItemsActions = require("../../src/items/actions");
 
 var FormActions = require("../../src/form/actions");
@@ -21,6 +23,17 @@ describe("form/Factory", function () {
   });
 
   describe("in reaction to", function () {
+    describe("ApplicationActions.LOADED", function () {
+      it("should populate itself with the given form value", function () {
+        Dispatcher.dispatch({
+          type: ApplicationActions.LOADED,
+          formValue: "foo"
+        });
+
+        FormStore.getFormValue().should.equal("foo");
+      });
+    });
+
     describe("FormActions.CHANGE_FIELD", function () {
       it("should change the form value", function () {
         Dispatcher.dispatch({

@@ -8,6 +8,8 @@ var FormActions = require("../../src/form/actions");
 
 var FormActionCreator = require("../../src/form/action_creator");
 
+var FormService = require("../../src/form/service");
+
 var Dispatcher = require("../../src/dispatcher");
 
 describe("form/ActionCreator", function () {
@@ -21,6 +23,16 @@ describe("form/ActionCreator", function () {
 
       args.type.should.equal(FormActions.CHANGE_FIELD);
       args.formValue.should.equal("foo");
+    });
+  });
+
+  describe("blurField()", function () {
+    it("should invoke FormService.saveFormValue() with the form value", function () {
+      this.sinon.spy(FormService, "saveFormValue");
+
+      FormActionCreator.blurField("foo");
+
+      FormService.saveFormValue.should.have.been.calledWith("foo");
     });
   });
 });

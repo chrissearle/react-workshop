@@ -12,12 +12,17 @@ module.exports = React.createClass({
     isLoading: React.PropTypes.bool,
     items: React.PropTypes.array,
     onAdd: React.PropTypes.func,
+    onBlur: React.PropTypes.func,
     onChange: React.PropTypes.func,
     onRemove: React.PropTypes.func
   },
 
   onAdd: function () {
     this.props.onAdd(this.props.formValue);
+  },
+
+  onBlur: function () {
+    this.props.onBlur(this.props.formValue);
   },
 
   onChange: function (e) {
@@ -51,7 +56,7 @@ module.exports = React.createClass({
             }, this)}
           </ul>}
 
-        <textarea value={this.props.formValue} onChange={this.onChange} />
+        <textarea value={this.props.formValue} onBlur={this.onBlur} onChange={this.onChange} />
         <button onClick={this.onAdd}>Add</button>
       </div>
     );
