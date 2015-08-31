@@ -38,6 +38,20 @@ describe("items/Component", function () {
       component.should.have.xpath("//li[contains(., 'bar')]/button[@class='delete']");
     });
 
+    it("should invoke a callback upon pressing a delete button", function () {
+      var items = ["foo"];
+
+      var onRemove = this.sinon.spy();
+
+      var component = TestUtils.renderIntoDocument(<Items isLoading={false} items={items} onRemove={onRemove} />);
+
+      var deleteButton = component.getDOMNode().querySelector("button.delete");
+
+      TestUtils.Simulate.click(deleteButton);
+
+      onRemove.should.have.been.calledWith(0);
+    });
+
     it("should render the given form value", function () {
       var component = TestUtils.renderIntoDocument(<Items isLoading={false} formValue="foo" />);
 
@@ -50,6 +64,18 @@ describe("items/Component", function () {
       var component = TestUtils.renderIntoDocument(<Items isLoading={false} />);
 
       component.should.have.xpath("//button[contains(., 'Add')]");
+    });
+
+    it("should invoke a callback upon pressing the add button", function () {
+      var onAdd = this.sinon.spy();
+
+      var component = TestUtils.renderIntoDocument(<Items isLoading={false} onAdd={onAdd} formValue="foo" />);
+
+      var addButton = component.getDOMNode().querySelector("button.add");
+
+      TestUtils.Simulate.click(addButton);
+
+      onAdd.should.have.been.calledWith("foo");
     });
   });
 });
