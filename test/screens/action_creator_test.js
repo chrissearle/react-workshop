@@ -6,15 +6,15 @@ require("../helper");
 
 var Promise = require("bluebird");
 
-var ApplicationActions = require("../../src/application/actions");
+var ApplicationActions = require("../../src/screens/actions");
 
-var ApplicationActionCreator = require("../../src/application/action_creator");
+var ApplicationActionCreator = require("../../src/screens/action_creator");
 
-var ItemsService = require("../../src/items/service");
+var ItemsService = require("../../src/screens/items/service");
 
 var Dispatcher = require("../../src/dispatcher");
 
-describe("application/ActionsCreator", function () {
+describe("screens/ActionsCreator", function () {
   describe("start()", function () {
     beforeEach(function () {
       this.sinon.stub(ItemsService, "getItems").returns(Promise.resolve(["foo", "bar"]));

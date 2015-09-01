@@ -2,7 +2,7 @@
 
 "use strict";
 
-var BaseStore = require("../base_store");
+var BaseStore = require("../../base_store");
 
 var FormActions = require("./actions");
 

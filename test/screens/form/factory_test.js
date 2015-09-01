@@ -2,19 +2,19 @@
 
 "use strict";
 
-require("../helper");
+require("../../helper");
 
-var Dispatcher = require("../../src/dispatcher");
+var Dispatcher = require("../../../src/dispatcher");
 
-var ItemsActions = require("../../src/items/actions");
+var ItemsActions = require("../../../src/screens/items/actions");
 
-var FormActions = require("../../src/form/actions");
+var FormActions = require("../../../src/screens/form/actions");
 
-var FormFactory = require("../../src/form/factory");
+var FormFactory = require("../../../src/screens/form/factory");
 
 var FormStore;
 
-describe("form/Factory", function () {
+describe("screens/form/Factory", function () {
   beforeEach(function () {
     FormStore = new FormFactory();
     FormStore.register();

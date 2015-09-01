@@ -2,13 +2,13 @@
 
 "use strict";
 
-require("../helper");
+require("../../helper");
 
 var React = require("react");
 
-var Items = require("../../src/items/component");
+var Items = require("../../../src/screens/items/component");
 
-describe("items/Component", function () {
+describe("screens/items/Component", function () {
   describe("when isLoading is true", function () {
     it("should render a loading text", function () {
       var rendering = React.renderToString(<Items isLoading={true} />);
@@ -38,18 +38,6 @@ describe("items/Component", function () {
       rendering = rendering.substring(rendering.indexOf("Delete") + "Delete".length);
 
       rendering.should.include("Delete");
-    });
-
-    it("should render the given form value", function () {
-      var rendering = React.renderToString(<Items isLoading={false} formValue="foo" />);
-
-      rendering.should.include("foo");
-    });
-
-    it("should render an add item button", function () {
-      var rendering = React.renderToString(<Items isLoading={false} />);
-
-      rendering.should.include("Add");
     });
   });
 });

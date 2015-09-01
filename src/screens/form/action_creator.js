@@ -4,7 +4,7 @@
 
 var FormActions = require("./actions");
 
-var Dispatcher = require("../dispatcher");
+var Dispatcher = require("../../dispatcher");
 
 module.exports = {
   changeField: function (formValue) {

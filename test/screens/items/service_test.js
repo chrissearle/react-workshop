@@ -2,13 +2,13 @@
 
 "use strict";
 
-require("../helper");
+require("../../helper");
 
 var nock = require("nock");
 
-var ItemsService = require("../../src/items/service");
+var ItemsService = require("../../../src/screens/items/service");
 
-describe("items/Service", function () {
+describe("screens/items/Service", function () {
   describe("getItems()", function () {
     it("should fetch the list of items", function () {
       nock("http://localhost")

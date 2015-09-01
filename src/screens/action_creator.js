@@ -6,7 +6,7 @@ var Dispatcher = require("../dispatcher");
 
 var ApplicationActions = require("./actions");
 
-var ItemsService = require("../items/service");
+var ItemsService = require("./items/service");
 
 module.exports = {
   start: function () {

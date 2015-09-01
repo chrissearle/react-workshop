@@ -2,15 +2,15 @@
 
 "use strict";
 
-require("../helper");
+require("../../helper");
 
-var FormActions = require("../../src/form/actions");
+var FormActions = require("../../../src/screens/form/actions");
 
-var FormActionCreator = require("../../src/form/action_creator");
+var FormActionCreator = require("../../../src/screens/form/action_creator");
 
-var Dispatcher = require("../../src/dispatcher");
+var Dispatcher = require("../../../src/dispatcher");
 
-describe("form/ActionCreator", function () {
+describe("screens/form/ActionCreator", function () {
   describe("changeField()", function () {
     it("should dispatch an CHANGE event with the form value", function () {
       this.sinon.spy(Dispatcher, "dispatch");

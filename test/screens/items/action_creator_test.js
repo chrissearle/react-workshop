@@ -2,17 +2,17 @@
 
 "use strict";
 
-require("../helper");
+require("../../helper");
 
-var ItemsActions = require("../../src/items/actions");
+var ItemsActions = require("../../../src/screens/items/actions");
 
-var ItemsActionCreator = require("../../src/items/action_creator");
+var ItemsActionCreator = require("../../../src/screens/items/action_creator");
 
-var ItemsService = require("../../src/items/service");
+var ItemsService = require("../../../src/screens/items/service");
 
-var Dispatcher = require("../../src/dispatcher");
+var Dispatcher = require("../../../src/dispatcher");
 
-describe("items/ActionsCreator", function () {
+describe("screens/items/ActionsCreator", function () {
   describe("addItem()", function () {
     beforeEach(function () {
       this.sinon.stub(ItemsService, "addItem").returns(Promise.resolve());
