@@ -2,6 +2,8 @@
 
 "use strict";
 
+var XPath = require("xpath-react/register");
+
 var React = require("react/addons");
 
 var TestUtils = React.addons.TestUtils;
@@ -12,24 +14,18 @@ module.exports = function (chai) {
     var object = this._obj;
     /* eslint-enable no-underscore-dangle */
 
-    if (!(object instanceof HTMLElement) && !TestUtils.isCompositeComponent(object)) {
-      throw new Error("Expected either a React component or a HTMLElement");
+    if (!TestUtils.isElement(object)) {
+      throw new Error("Expected a React element");
     }
 
-    var domNode = object.getDOMNode ? object.getDOMNode() : object;
-
-    document.body.appendChild(domNode.parentNode);
-
-    var result = document.evaluate(
+    var result = XPath.evaluate(
         expression,
-        domNode.parentNode,
+        object,
         null,
-        XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+        XPath.XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
 
-    document.body.removeChild(domNode.parentNode);
-
-    var expectedMessage = "Expected " + domNode.outerHTML + " to have xpath " + expression;
-    var notExpectedMessage = "Expected " + domNode.outerHTML + " to not have xpath " + expression;
+    var expectedMessage = "Expected " + object + " to have xpath " + expression;
+    var notExpectedMessage = "Expected " + object + " to not have xpath " + expression;
 
     this.assert(result, expectedMessage, notExpectedMessage);
   });

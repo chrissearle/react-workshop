@@ -2,11 +2,9 @@
 
 "use strict";
 
-require("../helper");
+var Helper = require("../helper");
 
-var React = require("react/addons");
-
-var TestUtils = React.addons.TestUtils;
+var React = require("react");
 
 var Items = require("../../src/items/component");
 
@@ -23,16 +21,16 @@ describe("items/Component", function () {
     it("should render the given items", function () {
       var items = ["foo", "bar"];
 
-      var rendering = React.renderToString(<Items isLoading={false} items={items} />);
+      var component = Helper.render(<Items isLoading={false} items={items} />);
 
-      rendering.should.include("foo");
-      rendering.should.include("bar");
+      component.should.have.xpath(".//li[contains(., 'foo')]");
+      component.should.have.xpath(".//li[contains(., 'bar')]");
     });
 
     it("should render a delete button for each item", function () {
       var items = ["foo", "bar"];
 
-      var component = TestUtils.renderIntoDocument(<Items isLoading={false} items={items} />);
+      var component = Helper.render(<Items isLoading={false} items={items} />);
 
       component.should.have.xpath("//li[contains(., 'foo')]/button[@class='delete']");
       component.should.have.xpath("//li[contains(., 'bar')]/button[@class='delete']");
@@ -43,25 +41,25 @@ describe("items/Component", function () {
 
       var onRemove = this.sinon.spy();
 
-      var component = TestUtils.renderIntoDocument(<Items isLoading={false} items={items} onRemove={onRemove} />);
+      var component = Helper.render(<Items isLoading={false} items={items} onRemove={onRemove} />);
 
-      var deleteButton = component.getDOMNode().querySelector("button.delete");
+      var deleteButton = Helper.find(component, ".//button[@class='delete']");
 
-      TestUtils.Simulate.click(deleteButton);
+      Helper.Simulate.click(deleteButton);
 
       onRemove.should.have.been.calledWith(0);
     });
 
     it("should render the given form value", function () {
-      var component = TestUtils.renderIntoDocument(<Items isLoading={false} formValue="foo" />);
+      var component = Helper.render(<Items isLoading={false} formValue="foo" />);
 
-      var textarea = component.getDOMNode().querySelector("textarea");
+      var textarea = Helper.find(component, ".//textarea");
 
-      textarea.value.should.equal("foo");
+      textarea.props.value.should.equal("foo");
     });
 
     it("should render an add item button", function () {
-      var component = TestUtils.renderIntoDocument(<Items isLoading={false} />);
+      var component = Helper.render(<Items isLoading={false} />);
 
       component.should.have.xpath("//button[contains(., 'Add')]");
     });
@@ -69,11 +67,11 @@ describe("items/Component", function () {
     it("should invoke a callback upon pressing the add button", function () {
       var onAdd = this.sinon.spy();
 
-      var component = TestUtils.renderIntoDocument(<Items isLoading={false} onAdd={onAdd} formValue="foo" />);
+      var component = Helper.render(<Items isLoading={false} onAdd={onAdd} formValue="foo" />);
 
-      var addButton = component.getDOMNode().querySelector("button.add");
+      var addButton = Helper.find(component, ".//button[@class='add']");
 
-      TestUtils.Simulate.click(addButton);
+      Helper.Simulate.click(addButton);
 
       onAdd.should.have.been.calledWith("foo");
     });

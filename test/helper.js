@@ -29,3 +29,39 @@ for (var property in window) {
     global[property] = window[property];
   }
 }
+
+var React = require("react/addons");
+
+var Simulate = {};
+
+["click"].forEach(function (action) {
+  Simulate[action] = function (component, eventData) {
+    var eventName = "on" + action.charAt(0).toUpperCase() + action.slice(1);
+
+    if (component.props[eventName]) {
+      component.props[eventName](eventData);
+    } else {
+      throw new Error("No event handler for " + eventName);
+    }
+  };
+});
+
+var XPath = require("xpath-react/register");
+
+module.exports = {
+  render: function (reactElement) {
+    var renderer = React.addons.TestUtils.createRenderer();
+    renderer.render(reactElement);
+    return renderer.getRenderOutput();
+  },
+
+  find: function (component, expression) {
+    return XPath.evaluate(
+      expression,
+      component,
+      null,
+      XPath.XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+  },
+
+  Simulate: Simulate
+};
