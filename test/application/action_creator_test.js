@@ -11,13 +11,15 @@ var ApplicationActions = require("../../src/application/actions");
 var ApplicationActionCreator = require("../../src/application/action_creator");
 
 var ItemsService = require("../../src/items/service");
+var FormService = require("../../src/form/service");
 
 var Dispatcher = require("../../src/dispatcher");
 
 describe("application/ActionsCreator", function () {
   describe("start()", function () {
     beforeEach(function () {
-      this.sinon.stub(ItemsService, "getItems").returns(Promise.resolve(["foo", "bar"]));
+      this.sinon.stub(ItemsService, "getItems").returns(Promise.resolve([{ name: "foo", complete: false },{ name: "bar", complete: false}]));
+      this.sinon.stub(FormService, "getFormValue").returns(Promise.resolve(""));
     });
 
     it("should dispatch an START event", function () {
@@ -30,11 +32,12 @@ describe("application/ActionsCreator", function () {
       args.type.should.equal(ApplicationActions.START);
     });
 
-    it("should invoke ItemsService.getItems()", function () {
+    it("should invoke services", function () {
       ApplicationActionCreator.start();
 
       /* eslint-disable no-unused-expressions */
       ItemsService.getItems.should.have.been.called;
+      FormService.getFormValue.should.have.been.called;
       /* eslint-enable no-unused-expressions */
     });
 
@@ -47,7 +50,7 @@ describe("application/ActionsCreator", function () {
         var args = Dispatcher.dispatch.args[1][0];
 
         args.type.should.equal(ApplicationActions.LOADED);
-        args.items.should.deep.equal(["foo", "bar"]);
+        args.items.should.deep.equal([{ name: "foo", complete: false },{ name: "bar", complete: false}]);
 
         done();
       });

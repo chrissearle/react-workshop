@@ -19,7 +19,7 @@ describe("items/Component", function () {
 
   describe("when isLoading is false", function () {
     it("should render the given items", function () {
-      var items = ["foo", "bar"];
+      var items = [{ name: "foo", complete: false },{ name: "bar", complete: false}];
 
       var rendering = React.renderToString(<Items isLoading={false} items={items} />);
 
