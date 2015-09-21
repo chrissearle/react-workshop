@@ -9,11 +9,12 @@ var babelify = require("babelify"),
 var application = express();
 
 var items = ["foo", "bar", "baz"];
+var formValue = "";
 
 application.get("/items", function (request, response) {
-  setTimeout(function () {
+//  setTimeout(function () {
     response.send(JSON.stringify(items));
-  }, 2000);
+//  }, 2000);
 });
 
 application.post("/items", function (request, response) {
@@ -23,6 +24,15 @@ application.post("/items", function (request, response) {
 
 application.delete("/items/:index", function (request, response) {
   items.splice(request.params.index, 1);
+  response.send();
+});
+
+application.get("/form", function (request, response) {
+  response.send(formValue);
+});
+
+application.post("/form", function (request, response) {
+  formValue = request.query.formValue;
   response.send();
 });
 

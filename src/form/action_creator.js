@@ -4,6 +4,8 @@
 
 var FormActions = require("./actions");
 
+var FormService = require("./service");
+
 var Dispatcher = require("../dispatcher");
 
 module.exports = {
@@ -12,5 +14,8 @@ module.exports = {
       type: FormActions.CHANGE_FIELD,
       formValue: formValue
     });
+
+    // needs to be separate - not wrapping the dispatch - see http://stackoverflow.com/a/28922465
+    FormService.setFormValue(formValue);
   }
 };

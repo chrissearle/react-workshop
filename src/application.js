@@ -4,7 +4,7 @@
 
 var React = require("react");
 
-var ApplicationctionCreator = require("./application/action_creator");
+var ApplicationCreator = require("./application/action_creator");
 
 var FormStore = require("./form/store");
 
@@ -14,7 +14,7 @@ var Items = require("./items/component");
 
 var ItemsStore = require("./items/store");
 
-var ItemsActionCreatore = require("./items/action_creator");
+var ItemsActionCreator = require("./items/action_creator");
 
 function renderApplication () {
   var state = {
@@ -22,8 +22,8 @@ function renderApplication () {
     onChange: FormActionCreator.changeField,
     isLoading: ItemsStore.getIsLoading(),
     items: ItemsStore.getItems(),
-    onAdd: ItemsActionCreatore.addItem,
-    onRemove: ItemsActionCreatore.removeItem
+    onAdd: ItemsActionCreator.addItem,
+    onRemove: ItemsActionCreator.removeItem
   };
 
   React.render(<Items {...state} />, document.getElementById("todo-application"));
@@ -35,4 +35,4 @@ ItemsStore.register();
 FormStore.addChangeListener(renderApplication);
 ItemsStore.addChangeListener(renderApplication);
 
-ApplicationctionCreator.start();
+ApplicationCreator.start();
