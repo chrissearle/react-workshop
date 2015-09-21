@@ -11,6 +11,9 @@ lint:
 test:
 	$(MOCHA) --recursive --compilers js:babel/register
 
+watch:
+	$(MOCHA) --watch --reporter min --recursive --compilers js:babel/register
+
 build:
 	[[ -d dist ]] || mkdir dist
 	cp src/index.html dist/
