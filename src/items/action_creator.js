@@ -25,5 +25,14 @@ module.exports = {
         iItem: iItem
       });
     });
+  },
+
+  toggleItem: function (iItem) {
+    ItemsService.toggleItem(iItem).then(function () {
+      Dispatcher.dispatch({
+        type: ItemsActions.TOGGLE_ITEM,
+        iItem: iItem
+      });
+    });
   }
 };

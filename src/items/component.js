@@ -13,7 +13,8 @@ module.exports = React.createClass({
     items: React.PropTypes.array,
     onAdd: React.PropTypes.func,
     onChange: React.PropTypes.func,
-    onRemove: React.PropTypes.func
+    onRemove: React.PropTypes.func,
+    onToggle: React.PropTypes.func,
   },
 
   onAdd: function () {
@@ -26,6 +27,10 @@ module.exports = React.createClass({
 
   onRemove: function (iItem) {
     this.props.onRemove(iItem);
+  },
+
+  onToggle: function (iItem) {
+    this.props.onToggle(iItem);
   },
 
   render: function () {
@@ -41,8 +46,9 @@ module.exports = React.createClass({
             {(this.props.items || []).map(function (item, i) {
               return (
                 <li key={i}>
-                  {item}
+                  {item.name}
 
+                  <input type="checkbox" checked={item.complete} onChange={this.onToggle.bind(null, i)}></input>
                   <button onClick={this.onRemove.bind(null, i)}>
                     Delete
                   </button>

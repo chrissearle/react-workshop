@@ -42,6 +42,10 @@ module.exports = class extends BaseStore {
         this.items.splice(event.iItem, 1);
         break;
 
+      case ItemsActions.TOGGLE_ITEM:
+          this.items[event.iItem].complete = !this.items[event.iItem].complete
+        break;
+
       default:
         return;
     }

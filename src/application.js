@@ -23,7 +23,8 @@ function renderApplication () {
     isLoading: ItemsStore.getIsLoading(),
     items: ItemsStore.getItems(),
     onAdd: ItemsActionCreator.addItem,
-    onRemove: ItemsActionCreator.removeItem
+    onRemove: ItemsActionCreator.removeItem,
+    onToggle: ItemsActionCreator.toggleItem
   };
 
   React.render(<Items {...state} />, document.getElementById("todo-application"));
